@@ -6,11 +6,11 @@ document.body.appendChild(SCREEN);
 SCREEN.id = "screen";
 var particles = [];
 
-var particleType = "";
+var particleTypes = "";
 fetch('./particles.json')
     .then(response => response.text())
     .then((data) => {
-        particleType = data;
+        particleTypes = data;
     })
 
 ////////////////////
@@ -72,7 +72,7 @@ class Particle {
         particles.splice(this, 1);
     }
 
-    update() {
+    update(progress) {
         this.element.style.position = "absolute";
         this.element.style.left = this.x + "px";
         this.element.style.top = this.y + "px";
@@ -82,6 +82,8 @@ class Particle {
         this.element.style.color = this.color;
         this.element.style.fontFamily = this.font;
         this.element.style.position = "absolute";
+
+        //TODO : use the progress gameTime to prevent time error with slow computer 
 
         this.xPrevious = this.x;
         this.yPrevious = this.y;
@@ -98,10 +100,14 @@ class Particle {
             this.gravity += 0.05;
             this.y += this.gravity;
         }
+
         //Friction
         //if (this.speed >= 0) this.speed -= 0.05;
         //
+
+        //Update life
         this.life -= 1;
+        //Destroy if life under zero
         if (this.life < 0) {
             this.destroy();
         }
@@ -120,7 +126,9 @@ document.querySelectorAll('.input').forEach(item => {
         var fontSize = parseInt(inputStyle.fontSize);
         var font = inputStyle.fontFamily;
         var textSize = displayTextWidth(input.value, fontSize + "px " + font);
-        
+
+        //TODO : Prevent the particles to go outside the bounds of the input
+
         var cursorPosition = input.selectionStart;
         var nexText = String(input.value).substring(0, cursorPosition);
         var textSize = displayTextWidth(nexText, fontSize + "px " + font);
@@ -128,13 +136,16 @@ document.querySelectorAll('.input').forEach(item => {
         var inputWeight = parseInt(inputStyle.padding) + parseInt(inputStyle.borderWidth);
         var px = input.offsetLeft + inputWeight + textSize;
         var py = input.offsetTop  + inputWeight;
-
+        //*TODO : Must create a function for creating the particle (and prevent modifing value that we don't want to change from the JSON)
         let particle = new Particle(pressedkey, px, py, 0.1, 0, 0.5, 100, fontSize, "red", font);
-        Object.assign(particle, JSON.parse(particleType)[input.dataset.type]);
+        Object.assign(particle, JSON.parse(particleTypes)[input.dataset.type]);
         particles.push(particle);
     });
 })
 
+////////////////////
+//App loop        //
+////////////////////
 function loop(timestamp) {
     var progress = timestamp - lastRender;
 
@@ -146,8 +157,8 @@ function loop(timestamp) {
 var lastRender = 0;
 window.requestAnimationFrame(loop);
 
-function update() {
+function update(progress) {
     particles.forEach(particle => {
-        particle.update();
+        particle.update(progress);
     });
 }

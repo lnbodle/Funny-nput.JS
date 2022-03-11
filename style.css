@@ -4,8 +4,8 @@
 }
 
 @font-face {
-    font-family: "Maga";
-    src: url("/fonts/maga-sans.ttf");
+    font-family: "Moon";
+    src: url("/fonts/moon_get-Heavy.ttf");
 }
 
 html,
@@ -41,6 +41,13 @@ body {
     padding: 5px;
 }
 
+.link {
+    font-size: large;
+    font-family: "Comfortaa";
+    color: #211A1E;
+    padding: 10px;
+}
+
 .input {
     font-size: xx-large;
     font-family: "Comfortaa";
@@ -49,6 +56,7 @@ body {
     padding: 5;
     border: 3px solid #211A1E;
     border-radius: 10px;
+    width: 30%;
 }
 
 #input1 {
@@ -56,5 +64,6 @@ body {
 }
 
 #input2 {
-    font-family: "Maga";
+    font-family: "Moon";
+    font-size: xx-large;
 }

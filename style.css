@@ -1,11 +1,11 @@
 @font-face {
-    font-family: "Cocogoose";
-    src: url("/fonts/Cocogoose\ Pro-trial.ttf");
+    font-family: "Comfortaa";
+    src: url("/fonts/Comfortaa-Bold.ttf");
 }
 
 @font-face {
-    font-family: "Pixel";
-    src: url("/fonts/04B_30__.TTF");
+    font-family: "Moon";
+    src: url("/fonts/moon_get-Heavy.ttf");
 }
 
 html,
@@ -28,7 +28,7 @@ body {
 
 .title {
     font-size: 3rem;
-    font-family: "Cocogoose";
+    font-family: "Comfortaa";
     color: #211A1E;
     padding: 5px;
     margin: 0;
@@ -36,18 +36,34 @@ body {
 
 .subtitle {
     font-size: medium;
-    font-family: "Cocogoose";
+    font-family: "Comfortaa";
     color: #211A1E;
     padding: 5px;
 }
 
+.link {
+    font-size: large;
+    font-family: "Comfortaa";
+    color: #211A1E;
+    padding: 10px;
+}
+
 .input {
     font-size: xx-large;
-    font-family: "Cocogoose";
+    font-family: "Comfortaa";
     background-color: white;
     margin: 5px;
     padding: 5;
     border: 3px solid #211A1E;
     border-radius: 10px;
+    width: 30%;
 }
 
+#input1 {
+    font-family: "Comfortaa";
+}
+
+#input2 {
+    font-family: "Moon";
+    font-size: xx-large;
+}

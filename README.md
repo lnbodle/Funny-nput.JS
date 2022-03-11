@@ -5,6 +5,8 @@
 
 > :warning: **This is a really early version there is a lot of bugs and the performance may not be good**
 
+[Try the demo here !](https://lnbodle.github.io/Funny-nput.JS/)
+
 Add `particle.json` and `funnynput.js` in your web project.
 
 Import in your Html file like this : 

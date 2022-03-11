@@ -3,6 +3,8 @@
 
 ![imagename](https://github.com/lnbodle/Funny-nput.JS/blob/main/assets/img/demo.gif)
 
+> :warning: **This is a really early version there is a lot of bugs and the performance may not be good**
+
 Add `particle.json` and `funnynput.js` in your web project.
 
 Import in your Html file like this : 

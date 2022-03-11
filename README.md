@@ -1,6 +1,8 @@
 # Funny-nput.JS
 ## A small JS libraries for adding particles in your input.
 
+![imagename]("/assets/demo.gif")
+
 Add `particle.json` and `funnynput.js` in your web project.
 
 Import in your Html file like this : 

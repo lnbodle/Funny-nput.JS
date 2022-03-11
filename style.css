@@ -1,0 +1,53 @@
+@font-face {
+    font-family: "Cocogoose";
+    src: url("/fonts/Cocogoose\ Pro-trial.ttf");
+}
+
+@font-face {
+    font-family: "Pixel";
+    src: url("/fonts/04B_30__.TTF");
+}
+
+html,
+body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+
+/*5bc0eb fde74c 9bc53d c3423f 211a1e*/
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    flex-direction: column; 
+    background-color: #FDE74C;
+}
+
+.title {
+    font-size: 3rem;
+    font-family: "Cocogoose";
+    color: #211A1E;
+    padding: 5px;
+    margin: 0;
+}
+
+.subtitle {
+    font-size: medium;
+    font-family: "Cocogoose";
+    color: #211A1E;
+    padding: 5px;
+}
+
+.input {
+    font-size: xx-large;
+    font-family: "Cocogoose";
+    background-color: white;
+    margin: 5px;
+    padding: 5;
+    border: 3px solid #211A1E;
+    border-radius: 10px;
+}
+

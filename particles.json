@@ -3,14 +3,16 @@
         "rotation": 0,
         "gravity": 1,
         "direction": 0.1,
-        "speed": 5,
-        "life": 100
+        "speed": 1,
+        "life": 100,
+        "useGravity": false,
+        "useAlpha": false
     },
     "exempleSad": {
         "rotation": 0,
         "gravity": 0.2,
         "direction": 0.3,
-        "speed": 0,
+        "speed": 5,
         "life": 200,
         "color": "black"
     }

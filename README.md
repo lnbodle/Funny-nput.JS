@@ -7,11 +7,11 @@
 
 [Try the demo here !](https://lnbodle.github.io/Funny-nput.JS/)
 
-Add `particle.json` and `funnynput.js` in your web project.
+Add `particles.json` and `funnynput.js` in your web project.
 
 Import in your Html file like this : 
 ```Html
-<input data-type="exempleFun" class="input">
+<input data-type="ex : particles/exemple" class="input">
 <script src="funnynput.js"></script>
 ```
 

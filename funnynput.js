@@ -6,11 +6,11 @@ document.body.appendChild(SCREEN);
 SCREEN.id = "screen";
 var particles = [];
 
-var particleType = "";
+var particleTypes = "";
 fetch('./particles.json')
     .then(response => response.text())
     .then((data) => {
-        particleType = data;
+        particleTypes = data;
     })
 
 ////////////////////
@@ -53,6 +53,9 @@ class Particle {
         this.fontSize = _fontSize;
         this.color = _color;
         this.font = _font;
+        //Parameter
+        this.useGravity = true;
+        this.useAlpha = true;
         //Seting the particle id;
         this.id = particle_id;
         particle_id += 1;
@@ -69,39 +72,50 @@ class Particle {
         particles.splice(this, 1);
     }
 
-    update() {
+    update(progress) {
         this.element.style.position = "absolute";
         this.element.style.left = this.x + "px";
         this.element.style.top = this.y + "px";
         this.element.style.transform = "Rotate(" + this.rotation + "deg)";
-        this.element.style.opacity = this.life / 100;
+        if (this.useAlpha) this.element.style.opacity = this.life / 100;
         this.element.style.fontSize = this.fontSize + "px";
         this.element.style.color = this.color;
         this.element.style.fontFamily = this.font;
         this.element.style.position = "absolute";
 
+        //TODO : use the progress gameTime to prevent time error with slow computer 
+
         this.xPrevious = this.x;
         this.yPrevious = this.y;
-
+        //Update the vertical speed and horizontal speed based on the direction
         this.vspeed =  Math.sin(this.direction) * this.speed;
         this.hspeed = -Math.cos(this.direction) * this.speed;
-
+        //Update the position
         this.x += this.vspeed;
         this.y += this.hspeed;
-
+        //Rotate the praticle
         this.rotation += 1;
+        //Update the gravity 
+        if (this.useGravity) {
+            this.gravity += 0.05;
+            this.y += this.gravity;
+        }
 
-        if (this.speed >= 0) this.speed -= 0.05;
+        //Friction
+        //if (this.speed >= 0) this.speed -= 0.05;
+        //
+
+        //Update life
         this.life -= 1;
+        //Destroy if life under zero
         if (this.life < 0) {
             this.destroy();
         }
 
-        this.gravity += 0.05;
-        this.y += this.gravity;
+        
     }
 }
-
+//Create particles when writing into inputs
 document.querySelectorAll('.input').forEach(item => {
     item.addEventListener('keydown', function (event) {
 
@@ -112,19 +126,26 @@ document.querySelectorAll('.input').forEach(item => {
         var fontSize = parseInt(inputStyle.fontSize);
         var font = inputStyle.fontFamily;
         var textSize = displayTextWidth(input.value, fontSize + "px " + font);
+
+        //TODO : Prevent the particles to go outside the bounds of the input
+
         var cursorPosition = input.selectionStart;
         var nexText = String(input.value).substring(0, cursorPosition);
         var textSize = displayTextWidth(nexText, fontSize + "px " + font);
+
         var inputWeight = parseInt(inputStyle.padding) + parseInt(inputStyle.borderWidth);
         var px = input.offsetLeft + inputWeight + textSize;
-        var py = input.offsetTop + inputWeight;
-
+        var py = input.offsetTop  + inputWeight;
+        //*TODO : Must create a function for creating the particle (and prevent modifing value that we don't want to change from the JSON)
         let particle = new Particle(pressedkey, px, py, 0.1, 0, 0.5, 100, fontSize, "red", font);
-        Object.assign(particle, JSON.parse(particleType)[input.dataset.type]);
+        Object.assign(particle, JSON.parse(particleTypes)[input.dataset.type]);
         particles.push(particle);
     });
 })
 
+////////////////////
+//App loop        //
+////////////////////
 function loop(timestamp) {
     var progress = timestamp - lastRender;
 
@@ -136,8 +157,8 @@ function loop(timestamp) {
 var lastRender = 0;
 window.requestAnimationFrame(loop);
 
-function update() {
+function update(progress) {
     particles.forEach(particle => {
-        particle.update();
+        particle.update(progress);
     });
 }
